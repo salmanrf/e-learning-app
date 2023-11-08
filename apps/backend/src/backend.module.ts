@@ -5,8 +5,10 @@ import * as joi from 'joi';
 import * as dotenv from 'dotenv';
 import { join } from 'path';
 
+import { AuthModule } from './auth/auth.module';
 import { BackendController } from '@backend/backend.controller';
 import { BackendService } from '@backend/backend.service';
+import { UsersModule } from '@backend/users';
 
 dotenv.config();
 
@@ -16,7 +18,9 @@ dotenv.config();
       envFilePath: 'apps/backend/.env',
       cache: false,
       isGlobal: true,
-      validationSchema: joi.object({}),
+      validationSchema: joi.object({
+        AUTH_JWT_SECRET: joi.string().required(),
+      }),
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -26,6 +30,8 @@ dotenv.config();
       synchronize: process.env.ENV !== 'production',
       logging: process.env.ENV !== 'production',
     }),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [BackendController],
   providers: [BackendService],
