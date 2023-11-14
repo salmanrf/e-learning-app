@@ -6,7 +6,7 @@ export class BackendController {
   constructor(private readonly backendService: BackendService) {}
 
   @Get()
-  getHello(): string {
-    return this.backendService.getHello();
+  async getHello() {
+    return await this.backendService.getHello();
   }
 }
