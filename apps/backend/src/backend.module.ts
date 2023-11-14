@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CacheModule } from '@nestjs/cache-manager';
 import * as joi from 'joi';
 import * as dotenv from 'dotenv';
 import { join } from 'path';
@@ -22,6 +23,7 @@ dotenv.config();
         AUTH_JWT_SECRET: joi.string().required(),
       }),
     }),
+    CacheModule.register(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.POSTGRES_URI,
