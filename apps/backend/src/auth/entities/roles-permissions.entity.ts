@@ -5,7 +5,7 @@ import {
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm';
-import { RolesEntity } from '@backend/auth/entities';
+import { PermissionsEntity, RolesEntity } from '@backend/auth/entities';
 
 @Entity('roles_permissions')
 export default class RolesPermissionsEntity {
@@ -19,9 +19,9 @@ export default class RolesPermissionsEntity {
   @JoinColumn({ name: 'role_id' })
   role: RolesEntity;
 
-  @ManyToOne(() => RolesEntity, (r) => r.role_permissions)
+  @ManyToOne(() => PermissionsEntity, (r) => r.role_permissions)
   @JoinColumn({ name: 'permission_id' })
-  permission: RolesEntity;
+  permission: PermissionsEntity;
 
   @CreateDateColumn({ type: 'timestamp without time zone' })
   created_at: Date | string;

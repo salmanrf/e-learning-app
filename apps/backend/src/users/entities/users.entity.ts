@@ -1,7 +1,10 @@
+import { RolesEntity } from '@backend/auth/entities';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,6 +25,10 @@ export default class UsersEntity {
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   full_name: string;
+
+  @ManyToOne(() => RolesEntity, (r) => r.role_id)
+  @JoinColumn({ name: 'role_id' })
+  role: RolesEntity;
 
   @CreateDateColumn({ type: 'timestamp without time zone' })
   created_at: Date | string;

@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -18,7 +19,7 @@ export default class PermissionsEntity {
   @PrimaryGeneratedColumn('increment')
   permission_id: number;
 
-  @Column({ type: 'varchar', length: 100, nullable: false, unique: true })
+  @Column({ type: 'varchar', length: 100, nullable: false })
   action: string;
 
   @Column({ type: 'int', nullable: true })
@@ -34,6 +35,7 @@ export default class PermissionsEntity {
   role_permissions: RolesPermissionsEntity[];
 
   @ManyToOne(() => ResourcesEntity, (res) => res.permissions)
+  @JoinColumn({ name: 'resource_id' })
   resource: ResourcesEntity;
 
   @CreateDateColumn({ type: 'timestamp without time zone' })
