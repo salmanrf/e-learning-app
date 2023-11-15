@@ -10,6 +10,7 @@ import { AuthModule } from '@backend/auth';
 import { BackendController } from '@backend/backend.controller';
 import { BackendService } from '@backend/backend.service';
 import { UsersModule } from '@backend/users';
+import { LecturesModule } from '@backend/lectures';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ dotenv.config();
       logging: process.env.ENV !== 'production',
     }),
     AuthModule,
+    LecturesModule,
     UsersModule,
   ],
   controllers: [BackendController],
