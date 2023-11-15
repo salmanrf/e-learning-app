@@ -6,7 +6,7 @@ import * as joi from 'joi';
 import * as dotenv from 'dotenv';
 import { join } from 'path';
 
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from '@backend/auth';
 import { BackendController } from '@backend/backend.controller';
 import { BackendService } from '@backend/backend.service';
 import { UsersModule } from '@backend/users';
@@ -23,7 +23,7 @@ dotenv.config();
         AUTH_JWT_SECRET: joi.string().required(),
       }),
     }),
-    CacheModule.register(),
+    CacheModule.register({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.POSTGRES_URI,

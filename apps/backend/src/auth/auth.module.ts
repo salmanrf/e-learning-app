@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   PermissionsEntity,
@@ -23,5 +23,6 @@ import AuthService from './auth.service';
   ],
   controllers: [AuthController],
   providers: [AuthService],
+  exports: [AuthService],
 })
-export class AuthModule {}
+export default class AuthModule {}
