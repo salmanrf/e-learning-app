@@ -4,13 +4,13 @@ import { IsOptional, IsString } from 'class-validator';
 export default class FindManyLecturesDto extends PaginationDto {
   @IsString()
   @IsOptional()
-  author_id: string;
+  author_id?: string;
 
   @IsString()
   @IsOptional()
-  title: string;
+  title?: string;
 
   @IsString()
   @IsOptional()
-  content: string;
+  content?: string;
 }
