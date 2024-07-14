@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { getPaginatedData, getPaginationParams } from '@backend/utils';
@@ -23,7 +27,7 @@ export default class LecturesService {
 
       return newLecture;
     } catch (error) {
-      throw error;
+      throw new InternalServerErrorException('Internal server error');
     }
   }
 
@@ -33,7 +37,7 @@ export default class LecturesService {
 
       return lecture;
     } catch (error) {
-      throw error;
+      throw new InternalServerErrorException('Internal server error');
     }
   }
 
@@ -85,7 +89,7 @@ export default class LecturesService {
 
       return data;
     } catch (error) {
-      throw error;
+      throw new InternalServerErrorException('Internal server error');
     }
   }
 
@@ -117,7 +121,11 @@ export default class LecturesService {
 
       return updatedLecture;
     } catch (error) {
-      throw error;
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+
+      throw new InternalServerErrorException('Internal server error');
     }
   }
 
@@ -127,7 +135,7 @@ export default class LecturesService {
 
       return lecture_id;
     } catch (error) {
-      throw error;
+      throw new InternalServerErrorException('Internal server error');
     }
   }
 }
